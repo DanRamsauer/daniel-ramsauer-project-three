@@ -22,7 +22,7 @@ import Form from './Form'
 //     •  if an anime is in the already watched list dont add it when searching for a new genre / anime
 
 // have a login or username to have specific lists
-//     • add a node that has the username and display their data into already watched / favourites
+//     • add a node that has the username and display their data into already watched / favourite
 
 function App() {
   const [anime, setAnime] = useState([]);
