@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect,useState } from 'react';
 import DisplayAnime from './DisplayAnime';
 import Form from './Form'
+import NextPage from './NextPage';
 
 // Pseudo Code
 // MVP
@@ -16,38 +17,83 @@ import Form from './Form'
 //     • have a dropdown menu with different genre options populated from the api
 
 // Stretch Goals
+
 // Have users be able to favourite them and add that list to firebase
 //     • have a button when clicked add the data of that api to firebase and display that in the favourites page / category
 //     • do the same thing but for the already watched category
 //     •  if an anime is in the already watched list dont add it when searching for a new genre / anime
+
+// button to view the most suggested animes 
+
+// filter by score
+  // have a button to filter them on the page by highest score
 
 // have a login or username to have specific lists
 //     • add a node that has the username and display their data into already watched / favourite
 
 function App() {
   const [anime, setAnime] = useState([]);
+  const [findAnime, setFindAnime] = useState([]);
+  const [nextPage, setNextPage] = useState(1);
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect( ()=> {
+  const apiCall = () => {
     axios({
       url: 'https://api.jikan.moe/v4/anime',
-      // url: 'https://api.jikan.moe/v4/top/anime',
       method: 'GET',
       dataResponse: 'json',
       params: {
-        // page: 3,
-        q: '',
+        q: findAnime,
         sfw: false
       }
     }) .then((res) => {
       const results = res.data.data;
       setAnime(results);
     })
-  }, [])
+  }
+
+  useEffect(()=>{
+    axios({
+      url: 'https://api.jikan.moe/v4/top/anime',
+      method: 'GET',
+      dataResponse: 'json',
+      params: {
+        page: nextPage
+      }
+    }) .then((res) => {
+      const results = res.data.data;
+      setAnime(results);
+    })
+  },[nextPage])
+    
+    const searchChange = (e) => {
+      setFindAnime(e.target.value);
+    }
+  
+    const submit = (e) => {
+      e.preventDefault();
+      apiCall();
+      setFindAnime('');
+      setSubmitted(true)
+    }
+
+    const homeClick = () => {
+      setSubmitted(false);
+    }
 
   return (
-    <div className="App">
+    <div>
       <h1>Anime Finder</h1>
-      <Form />
+      <Form 
+        searchChange={searchChange} 
+        findAnime={findAnime} 
+        submit={submit}
+      />
+
+      {
+        submitted ? <button onClick={homeClick}>Back Home</button> : <NextPage nextPage={nextPage} setNextPage={setNextPage}/>
+      }
+
       <DisplayAnime anime={anime}/>
     </div>
   );

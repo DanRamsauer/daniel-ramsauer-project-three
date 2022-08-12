@@ -1,11 +1,11 @@
-const Form = () => {
+const Form = ({searchChange, findAnime, submit}) => {
     return(
-        <section>
+        <section className="form">
             <form>
                 <label htmlFor="search">Search an anime: </label>
-                <input type="text" for='search' placeholder="Naruto"/>
+                <input type="text" htmlFor='search' placeholder="Naruto" onChange={searchChange} value={findAnime}/>
 
-                <button type="submit">Search</button>
+                <button type="submit" onClick={submit}>Search</button>
             </form>
         </section>
     )
