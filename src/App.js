@@ -79,6 +79,11 @@ function App() {
 
     const homeClick = () => {
       setSubmitted(false);
+      if (setNextPage > 1) {
+        setNextPage(1);
+      } else {
+        setNextPage(0);
+      }
     }
 
   return (
