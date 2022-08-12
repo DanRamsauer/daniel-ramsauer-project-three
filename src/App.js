@@ -46,7 +46,7 @@ function App() {
         q: findAnime,
         sfw: false
       }
-    }) .then((res) => {
+    }).then((res) => {
       const results = res.data.data;
       setAnime(results);
     })
@@ -60,7 +60,7 @@ function App() {
       params: {
         page: nextPage
       }
-    }) .then((res) => {
+    }).then((res) => {
       const results = res.data.data;
       setAnime(results);
     })
