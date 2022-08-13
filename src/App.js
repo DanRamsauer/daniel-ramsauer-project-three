@@ -36,21 +36,26 @@ function App() {
   const [findAnime, setFindAnime] = useState([]);
   const [nextPage, setNextPage] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [hideButtons, setHideButtons] = useState(false);
 
-  const apiCall = () => {
-    axios({
-      url: 'https://api.jikan.moe/v4/anime',
-      method: 'GET',
-      dataResponse: 'json',
-      params: {
-        q: findAnime,
-        sfw: false
+    useEffect( () => {
+      if (submitted) {
+        axios({
+          url: 'https://api.jikan.moe/v4/anime',
+          method: 'GET',
+          dataResponse: 'json',
+          params: {
+            q: findAnime,
+            sfw: false
+          }
+        }).then((res) => {
+          const results = res.data.data;
+          setAnime(results);
+          setFindAnime('');
+          setSubmitted(false);
+        })
       }
-    }).then((res) => {
-      const results = res.data.data;
-      setAnime(results);
-    })
-  }
+    }, [submitted])
 
   useEffect(()=>{
     axios({
@@ -72,17 +77,17 @@ function App() {
   
     const submit = (e) => {
       e.preventDefault();
-      apiCall();
-      setFindAnime('');
-      setSubmitted(true)
+      setSubmitted(true);
+      setHideButtons(true);
     }
 
     const homeClick = () => {
+      setHideButtons(false);
       setSubmitted(false);
-      if (setNextPage > 1) {
+      if (nextPage > 1) {
         setNextPage(1);
       } else {
-        setNextPage(0);
+        setNextPage(0)
       }
     }
 
@@ -96,7 +101,7 @@ function App() {
       />
 
       {
-        submitted ? <button onClick={homeClick}>Back Home</button> : <NextPage nextPage={nextPage} setNextPage={setNextPage}/>
+        hideButtons ? <button onClick={homeClick}>Back Home</button> : <NextPage nextPage={nextPage} setNextPage={setNextPage}/>
       }
 
       <DisplayAnime anime={anime}/>
