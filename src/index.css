@@ -21,7 +21,7 @@ html{
   display: flex;
   flex-direction: column;
   width: 15%;
-  padding: 30px;
+  padding: 15px;
   margin: 0 auto;
 }
 
@@ -34,4 +34,28 @@ html{
 
 .form{
   align-self: center;
+}
+
+@media (max-width: 1500px) {
+  .anime {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .wrapper {
+    width: 20%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .wrapper {
+    width: 35%;
+  }
+}
+
+@media (max-width: 580px) {
+  .wrapper {
+    width: 85%;
+  }
 }
