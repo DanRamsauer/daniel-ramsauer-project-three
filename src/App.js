@@ -1,11 +1,56 @@
 import './index.css';
 import axios from 'axios';
 import { useEffect,useState } from 'react';
-import firebase from "./firebase";
-import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 import DisplayAnime from './DisplayAnime';
+import AnimeDetails from './AnimeDetails';
+import SearchAnime from './SearchAnime';
 import Form from './Form'
 import NextPage from './NextPage';
+import { Routes, Route } from 'react-router-dom';
+import firebase from "./firebase";
+import { getDatabase, ref, onValue, push, remove } from "firebase/database";
+
+// TODO: Clear state after form is submitted
+// TODO: Create a seperate page for the pages api call
+
+function App() {
+  const [anime, setAnime] = useState([]);
+  const [nextPage, setNextPage] = useState(1);
+  
+
+    useEffect(()=>{
+      axios({
+      url: 'https://api.jikan.moe/v4/top/anime',
+      method: 'GET',
+      dataResponse: 'json',
+      params: {
+        page: nextPage
+      }
+    }).then((res) => {
+      const results = res.data.data;
+      setAnime(results);
+    })
+  },[nextPage])
+    
+    return (
+      <div>
+      <h1>Anime Finder</h1>
+      <Form />
+
+      {
+        <NextPage nextPage={nextPage} setNextPage={setNextPage}/>
+      }
+
+      <Routes>
+        <Route path='/' element={ <DisplayAnime anime={anime}/> } />
+        <Route path='/anime/:animeId' element={ <AnimeDetails /> }/>
+        <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
 
 // Pseudo Code
 // MVP
@@ -32,83 +77,3 @@ import NextPage from './NextPage';
 
 // have a login or username to have specific lists
 //     • add a node that has the username and display their data into already watched / favourite
-
-function App() {
-  const [anime, setAnime] = useState([]);
-  const [findAnime, setFindAnime] = useState([]);
-  const [nextPage, setNextPage] = useState(1);
-  const [submitted, setSubmitted] = useState(false);
-  const [hideButtons, setHideButtons] = useState(false);
-
-    useEffect( () => {
-      if (submitted) {
-        axios({
-          url: 'https://api.jikan.moe/v4/anime',
-          method: 'GET',
-          dataResponse: 'json',
-          params: {
-            q: findAnime,
-            sfw: false
-          }
-        }).then((res) => {
-          const results = res.data.data;
-          setAnime(results);
-          setFindAnime('');
-          setSubmitted(false);
-        })
-      }
-    }, [submitted])
-
-  useEffect(()=>{
-    axios({
-      url: 'https://api.jikan.moe/v4/top/anime',
-      method: 'GET',
-      dataResponse: 'json',
-      params: {
-        page: nextPage
-      }
-    }).then((res) => {
-      const results = res.data.data;
-      setAnime(results);
-    })
-  },[nextPage])
-    
-    const searchChange = (e) => {
-      setFindAnime(e.target.value);
-    }
-  
-    const submit = (e) => {
-      e.preventDefault();
-      setSubmitted(true);
-      setHideButtons(true);
-    }
-
-    const homeClick = () => {
-      setHideButtons(false);
-      setSubmitted(false);
-      if (nextPage > 1) {
-        setNextPage(1);
-      } else {
-        setNextPage(0)
-      }
-    }
-
-  return (
-    <div>
-      <h1>Anime Finder</h1>
-      <Form 
-        searchChange={searchChange} 
-        findAnime={findAnime} 
-        submit={submit}
-      />
-
-      {
-        hideButtons ? <button onClick={homeClick}>Back Home</button> : <NextPage nextPage={nextPage} setNextPage={setNextPage}/>
-      }
-
-      <DisplayAnime anime={anime}/>
-    </div>
-  );
-}
-
-export default App;
