@@ -1,6 +1,8 @@
 import './index.css';
 import axios from 'axios';
 import { useEffect,useState } from 'react';
+import firebase from "./firebase";
+import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 import DisplayAnime from './DisplayAnime';
 import Form from './Form'
 import NextPage from './NextPage';
