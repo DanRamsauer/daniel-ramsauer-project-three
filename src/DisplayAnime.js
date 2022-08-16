@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const DisplayAnime = ({ setAnime, anime, nextPage, setNextPage }) => {
+const DisplayAnime = ({ nextPage, setNextPage }) => {
+
+    const [anime, setAnime] = useState([]);
 
     useEffect( () => {
         axios({
@@ -19,7 +21,6 @@ const DisplayAnime = ({ setAnime, anime, nextPage, setNextPage }) => {
       })
     },[nextPage])
 
-
     return(
         <section>
             {/* <Link to={`/page/${2}`}>
@@ -34,7 +35,7 @@ const DisplayAnime = ({ setAnime, anime, nextPage, setNextPage }) => {
 
             <section className="anime">
                 {
-                    anime.map( (anime) =>{
+                    anime.map( (anime) => {
                         return(
                             <li className="container" key={anime.mal_id}>
                                 <Link to={`/anime/${anime.mal_id}`}>

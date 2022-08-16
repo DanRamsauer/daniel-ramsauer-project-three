@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const AboutAnime = ({ setFavourite, handleAddingAnime, anime, setAnime } ) => {
+const AboutAnime = ({ addingAnime, anime, setAnime } ) => {
 
     const { animeId } = useParams();
     const [error, setError] = useState(false);
@@ -13,9 +13,7 @@ const AboutAnime = ({ setFavourite, handleAddingAnime, anime, setAnime } ) => {
             url: `https://api.jikan.moe/v4/anime/${animeId}/full`
         }).then( (res) => {
             setAnime(res.data.data)
-        }).catch(err => { 
-            // what now? 
-            console.log(err); 
+        }).catch(() => {
             setError(true);
           })
     },[])
@@ -40,14 +38,14 @@ const AboutAnime = ({ setFavourite, handleAddingAnime, anime, setAnime } ) => {
                 <div className="aboutAnime">
                     <div className="wrapper">
     
-                        <button onClick={ () => handleAddingAnime() }>Add to watch later</button>
+                        <button onClick={ () => addingAnime() }>Add to watch later</button>
                         { anime.images ? <img className="aboutImg" src={anime.images.jpg.image_url} alt={anime.title} /> : null }
                         <h2>{ anime.title_english ? anime.title_english : anime.title }</h2>
                         <p>{anime.synopsis}</p>
                         <h3>{ anime.episodes > 1 ? `${anime.episodes} episodes` : `${anime.episodes} episode` }</h3>
                         <p>Score {anime.score}</p>
                         <p>Ranked {anime.rank}</p>
-                        <p>{ anime.streaming ? `Watch on ${anime.streaming.map( (anime) => { return( anime.name ) }) }` : null}</p>
+                        <p>{ anime.streaming ? `Watch on ${anime.streaming.map( (anime) => { return( ` ${anime.name}` ) }) }` : null}</p>
                     </div>
                 </div>
                 <Link to={'/'}>

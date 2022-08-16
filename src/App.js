@@ -17,47 +17,13 @@ function App() {
   const [ anime, setAnime ] = useState([]);
   const [ nextPage, setNextPage ] = useState(1);
 
-
-  // useEffect( () => {
-  //   const database = getDatabase(firebase);
-
-  //   const dbRef = ref(database);
-
-  //   onValue(dbRef, (response) =>{
-  //     console.log(response.val());
-
-  //     const newState = [];
-  //     const animeData = response.val();
-
-  //     for (let fbKey in animeData) {
-  //       newState.push(
-  //         {
-  //           key: fbKey, 
-  //           name: animeData[fbKey]
-  //         }
-  //       );
-  //       console.log(newState);
-  //     }
-  //   })
-  // }, [])
-
-  // console.log(anime);
   
-  const handleAddingAnime = () => {
-    const database = getDatabase(firebase);
-    const dbRef = ref(database);
-      if (anime) {
-        push(dbRef, anime)
-      }
-  }
-
-  const handleRemoveAnime = () => {
+  const addingAnime = () => {
     const database = getDatabase(firebase);
     const dbRef = ref(database);
 
-    remove(dbRef);
+    push(dbRef, anime)
   }
-
     
     return (
       <div>
@@ -65,12 +31,10 @@ function App() {
         
         <Form />
 
-        <button onClick={handleRemoveAnime()}>clear firebase</button>
-
         <Routes>
           <Route path='/' element={ <DisplayAnime anime={anime} setAnime={setAnime} nextPage={nextPage} setNextPage={setNextPage} /> } />
-          <Route path='/anime/:animeId' element={ <AboutAnime handleAddingAnime={handleAddingAnime} anime={anime} setAnime={setAnime} /> }/>
-          <Route path='/search/:animeSearched' element={ <SearchAnime nextPage={nextPage} /> } />
+          <Route path='/anime/:animeId' element={ <AboutAnime addingAnime={addingAnime} anime={anime} setAnime={setAnime} /> }/>
+          <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
           <Route path='/page/:page' element={ <NextPage anime={anime} nextPage={nextPage} setNextPage={setNextPage} setAnime={setAnime} /> }/>
           <Route path='*' element={ <ErrorPage /> } />
         </Routes>

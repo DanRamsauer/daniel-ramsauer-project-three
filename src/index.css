@@ -15,6 +15,17 @@ code {
 html{
   font-size: 125%;
   text-align: center;
+  background-image: url(../assets/prometey-sanchez-noskov-c6M7AoevSXE-unsplash.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+h1,
+label,
+p,
+h2,
+h3{
+  color: white;
 }
 
 .container{
@@ -37,6 +48,14 @@ html{
   margin: 0 auto;
 }
 
+.anime img {
+  transition: 0.5s;
+}
+
+.anime img:hover {
+  transform: scale(1.1);
+}
+
 .form{
   align-self: center;
 }
@@ -44,6 +63,16 @@ html{
 .aboutImg {
   width: 15%;
   margin: 0 auto;
+}
+
+.aboutAnime p {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.aboutAnime button {
+  width: 5%;
+  margin: 20px auto;
 }
 
 @media (max-width: 1500px) {
