@@ -11,6 +11,9 @@ import { Link } from "react-router-dom";
 import firebase from "./firebase";
 import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 
+// TODO: add firebase to add to favourites and watched later 
+// TODO: add more styling and a background
+
 function App() {
   const [anime, setAnime] = useState([]);
   const [nextPage, setNextPage] = useState(1);

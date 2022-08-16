@@ -25,6 +25,7 @@ const NextPage = ({ nextPage, setAnime, anime, setNextPage }) => {
 
     return(
         <div>
+            {/* TODO: fix the adding a 1 but subtracting works */}
             <Link to={`/page/${(page - 1)}`}>
                 <h1>last</h1>
             </Link>

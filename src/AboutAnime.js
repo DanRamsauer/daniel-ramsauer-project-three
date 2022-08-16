@@ -20,7 +20,8 @@ const AboutAnime = () => {
         <section>
             <div className="aboutAnime">
                 <div className="wrapper">
-                    <img src={anime.images.jpg.image_url} alt={anime.title} />
+                    {/* TODO: fix the images breaking the website */}
+                    {/* <img src={anime.images.jpg.image_url} alt={anime.title} /> */}
                     <h2>{ anime.title_english ? anime.title_english : anime.title }</h2>
                     <p>{anime.synopsis}</p>
                     <h3>{ anime.episodes > 1 ? `${anime.episodes} episodes` : `${anime.episodes} episode` }</h3>
