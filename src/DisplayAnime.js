@@ -19,17 +19,18 @@ const DisplayAnime = ({ setAnime, anime, nextPage, setNextPage }) => {
       })
     },[nextPage])
 
+
     return(
         <section>
             {/* <Link to={`/page/${2}`}>
                 <h3>Next page</h3>
             </Link> */}
 
-            <button onClick={()=> setNextPage(nextPage - 1)}>Last Page</button>
+            { nextPage > 1 ? <button onClick={()=> setNextPage(nextPage - 1)}>Last Page</button> : null }
     
-            <button onClick={()=> setNextPage(nextPage + 1)}>Next Page</button>
+            { nextPage > 0 ? <button onClick={()=> setNextPage(nextPage + 1)}>Next Page</button> : null }
     
-            <p>{`Page ${nextPage}`}</p>
+            { nextPage > 0 ? <p>{`Page ${nextPage}`}</p> : null }
 
             <section className="anime">
                 {

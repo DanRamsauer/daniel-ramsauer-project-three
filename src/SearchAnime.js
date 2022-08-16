@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 
-const SearchedAnime = () => {
+const SearchedAnime = ({ nextPage }) => {
 
     const { animeSearched } = useParams();
     const [anime, setAnime] = useState([]);
@@ -20,12 +20,12 @@ const SearchedAnime = () => {
         }).then( (res) => {
             setAnime(res.data.data);
         })
-    })
+    }, [animeSearched])
 
     return(
         <section>
             <Link to={'/'}>
-                <h3>Back home</h3>
+                <h3>Home</h3>
             </Link>
             <section className="anime">
             {

@@ -26,17 +26,18 @@ const NextPage = ({ nextPage, setAnime, anime, setNextPage }) => {
     return(
         <div>
             {/* TODO: fix the adding a 1 but subtracting works */}
-            <Link to={`/page/${(page - 1)}`}>
+            <Link to={`/page/${ (page - 1) }`}>
                 <h1>last</h1>
             </Link>
-            <Link to={`/page/${ page + 1 }`}>
+            <Link to={`/page/${ (page + 1) }`}>
                 <h1>next</h1>
             </Link>
-            {/* <button onClick={()=> setNextPage(nextPage - 1)}>Last Page</button>
+            {/* <button onClick={()=> setNextPage(page - 1)}>Last Page</button>
 
-            <button onClick={()=> setNextPage(nextPage + 1)}>Next Page</button>
+            <button onClick={()=> setNextPage(page + 1)}>Next Page</button>
 
-            <p>{`Page ${nextPage}`}</p> */}
+            <p>{`Page ${page}`}</p> */}
+
 
             <section className="anime">
             {
