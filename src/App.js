@@ -10,42 +10,38 @@ import { Routes, Route } from 'react-router-dom';
 import firebase from "./firebase";
 import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 
-// TODO: Clear state after form is submitted
-// TODO: Create a seperate page for the pages api call
-
 function App() {
   const [anime, setAnime] = useState([]);
   const [nextPage, setNextPage] = useState(1);
   
 
-    useEffect(()=>{
-      axios({
-      url: 'https://api.jikan.moe/v4/top/anime',
-      method: 'GET',
-      dataResponse: 'json',
-      params: {
-        page: nextPage
-      }
-    }).then((res) => {
-      const results = res.data.data;
-      setAnime(results);
-    })
-  },[nextPage])
+  //   useEffect(()=>{
+  //     axios({
+  //     url: 'https://api.jikan.moe/v4/top/anime',
+  //     method: 'GET',
+  //     dataResponse: 'json',
+  //     params: {
+  //       page: nextPage
+  //     }
+  //   }).then((res) => {
+  //     const results = res.data.data;
+  //     setAnime(results);
+  //   })
+  // },[nextPage])
     
     return (
       <div>
-      <h1>Anime Finder</h1>
-      <Form />
+        <h1>Anime Finder</h1>
+        <Form />
 
-      {
-        <NextPage nextPage={nextPage} setNextPage={setNextPage}/>
-      }
+        <NextPage anime={anime} nextPage={nextPage} setNextPage={setNextPage} setAnime={setAnime} />
 
-      <Routes>
-        <Route path='/' element={ <DisplayAnime anime={anime}/> } />
-        <Route path='/anime/:animeId' element={ <AnimeDetails /> }/>
-        <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
-      </Routes>
+        <Routes>
+          <Route path='/' element={ <DisplayAnime anime={anime} setAnime={setAnime} nextPage={nextPage}/> } />
+          <Route path='/anime/:animeId' element={ <AnimeDetails /> }/>
+          <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
+          <Route path='/page/:page' element={ <DisplayAnime /> }/>
+        </Routes>
     </div>
   );
 }

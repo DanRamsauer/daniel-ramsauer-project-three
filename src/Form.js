@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
     const [findAnime, setFindAnime] = useState([]);
@@ -8,19 +8,21 @@ const Form = () => {
         setFindAnime(e.target.value);
       }
 
-      const clearSearch = () => {
-        findAnime = '';
+      const navigate = useNavigate();
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate(`/search/${findAnime}`);
+        setFindAnime('');
       }
 
     return(
         <section className="form">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="search">Search an anime: </label>
                 <input type="text" htmlFor='search' placeholder="Naruto" onChange={searchChange} value={findAnime}/>
 
-                <Link to={`/search/${findAnime}`}>
-                    <button>Search</button>
-                </Link>
+                <button type="submit">Search</button>
             </form>
         </section>
     )
