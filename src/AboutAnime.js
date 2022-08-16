@@ -13,7 +13,6 @@ const AboutAnime = ({ addingAnime, anime, setAnime } ) => {
             url: `https://api.jikan.moe/v4/anime/${animeId}/full`
         }).then( (res) => {
             setAnime(res.data.data)
-            console.log(res.data.data)
         }).catch(() => {
             setError(true);
           })
@@ -39,7 +38,7 @@ const AboutAnime = ({ addingAnime, anime, setAnime } ) => {
                 <div className="aboutAnime">
                     <div className="wrapper">
     
-                        <button onClick={ () => addingAnime() }>Add to watch later</button>
+                        <button onClick={ () => addingAnime() }>Add to favourites</button>
                         { anime.images ? <img className="aboutImg" src={anime.images.jpg.image_url} alt={anime.title} /> : null }
                         <h2>{ anime.title_english ? anime.title_english : anime.title }</h2>
                         <p>{anime.synopsis}</p>

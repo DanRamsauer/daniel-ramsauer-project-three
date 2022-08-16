@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -33,6 +32,10 @@ const DisplayAnime = ({ nextPage, setNextPage }) => {
     
             { nextPage > 0 ? <p>{`Page ${nextPage}`}</p> : null }
 
+            <Link to={'/watch/watchlater'}>
+                <h4>Favourites</h4>
+            </Link>
+            
             <section className="anime">
                 {
                     anime.map( (anime) => {

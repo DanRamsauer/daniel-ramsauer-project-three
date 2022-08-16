@@ -6,13 +6,13 @@ import SearchAnime from './SearchAnime';
 import Form from './Form'
 import ErrorPage from './ErrorPage';
 import NextPage from './NextPage';
+import WatchLater from './WatchLater';
 import { Routes, Route } from 'react-router-dom';
 import firebase from "./firebase";
 import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 
 // TODO: add firebase to add to favourites and watched later
 // TODO: change title and favicon
-// TODO: fix mobile media querys
 
 function App() {
   const [ anime, setAnime ] = useState([]);
@@ -37,6 +37,7 @@ function App() {
           <Route path='/anime/:animeId' element={ <AboutAnime addingAnime={addingAnime} anime={anime} setAnime={setAnime} /> }/>
           <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
           <Route path='/page/:page' element={ <NextPage anime={anime} nextPage={nextPage} setNextPage={setNextPage} setAnime={setAnime} /> }/>
+          <Route path='/watch/:later' element={ <WatchLater /> } />
           <Route path='*' element={ <ErrorPage /> } />
         </Routes>
     </div>
