@@ -17,11 +17,17 @@ html{
   text-align: center;
 }
 
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin: 0 auto;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: 15%;
-  padding: 15px;
+  width: 85%;
   margin: 0 auto;
 }
 
@@ -35,6 +41,7 @@ html{
 .form{
   align-self: center;
 }
+
 
 @media (max-width: 1500px) {
   .anime {
@@ -56,6 +63,6 @@ html{
 
 @media (max-width: 580px) {
   .wrapper {
-    width: 85%;
+    width: 95%;
   }
 }

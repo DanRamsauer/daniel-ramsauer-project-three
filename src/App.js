@@ -2,45 +2,30 @@ import './index.css';
 import axios from 'axios';
 import { useEffect,useState } from 'react';
 import DisplayAnime from './DisplayAnime';
-import AnimeDetails from './AnimeDetails';
+import AboutAnime from './AboutAnime';
 import SearchAnime from './SearchAnime';
 import Form from './Form'
 import NextPage from './NextPage';
 import { Routes, Route } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import firebase from "./firebase";
 import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 
 function App() {
   const [anime, setAnime] = useState([]);
   const [nextPage, setNextPage] = useState(1);
-  
-
-  //   useEffect(()=>{
-  //     axios({
-  //     url: 'https://api.jikan.moe/v4/top/anime',
-  //     method: 'GET',
-  //     dataResponse: 'json',
-  //     params: {
-  //       page: nextPage
-  //     }
-  //   }).then((res) => {
-  //     const results = res.data.data;
-  //     setAnime(results);
-  //   })
-  // },[nextPage])
     
     return (
       <div>
         <h1>Anime Finder</h1>
+        
         <Form />
 
-        <NextPage anime={anime} nextPage={nextPage} setNextPage={setNextPage} setAnime={setAnime} />
-
         <Routes>
-          <Route path='/' element={ <DisplayAnime anime={anime} setAnime={setAnime} nextPage={nextPage}/> } />
-          <Route path='/anime/:animeId' element={ <AnimeDetails /> }/>
+          <Route path='/' element={ <DisplayAnime anime={anime} setAnime={setAnime} nextPage={nextPage} setNextPage={setNextPage} /> } />
+          <Route path='/anime/:animeId' element={ <AboutAnime /> }/>
           <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
-          <Route path='/page/:page' element={ <DisplayAnime /> }/>
+          <Route path='/page/:page' element={ <NextPage anime={anime} nextPage={nextPage} setNextPage={setNextPage} setAnime={setAnime} /> }/>
         </Routes>
     </div>
   );

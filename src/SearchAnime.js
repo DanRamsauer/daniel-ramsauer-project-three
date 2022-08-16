@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 
-const SearchedAnime = ({ findAnime }) => {
+const SearchedAnime = () => {
 
     const { animeSearched } = useParams();
     const [anime, setAnime] = useState([]);
