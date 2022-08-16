@@ -13,6 +13,7 @@ const AboutAnime = ({ addingAnime, anime, setAnime } ) => {
             url: `https://api.jikan.moe/v4/anime/${animeId}/full`
         }).then( (res) => {
             setAnime(res.data.data)
+            console.log(res.data.data)
         }).catch(() => {
             setError(true);
           })

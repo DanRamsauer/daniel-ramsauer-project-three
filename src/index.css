@@ -83,18 +83,50 @@ h3{
 
 @media (max-width: 1400px) {
   .wrapper {
-    width: 20%;
+    width: 88%;
+  }
+  .aboutAnime button {
+    width: 15%;
+    margin: 20px auto;
+  }
+  .aboutImg {
+    width: 25%;
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 1000px) {
-  .wrapper {
+  .aboutImg {
     width: 35%;
+    margin: 0 auto;
+  }
+  .aboutAnime button {
+    width: 15%;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 930px) {
+  .aboutAnime button {
+    width: 20%;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 730px) {
+  .aboutAnime button {
+    width: 25%;
+    margin: 20px auto;
   }
 }
 
 @media (max-width: 580px) {
-  .wrapper {
-    width: 95%;
+  .aboutImg {
+    width: 50%;
+    margin: 0 auto;
+  }
+  .aboutAnime button {
+    width: 35%;
+    margin: 20px auto;
   }
 }
