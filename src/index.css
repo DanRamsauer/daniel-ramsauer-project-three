@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* TODO: have button change color on hover */
+/* TODO: have links get bigger on hover and change the color */
+/* TODO: fix favourites page */
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -28,6 +32,30 @@ h3{
   color: white;
 }
 
+button{
+  background-color: white;
+  border: white 3px solid;
+  color: black;
+  transition: 0.5s;
+}
+
+button:hover{
+  background-color: lightcoral;
+  border: solid lightcoral 3px;
+}
+
+.link{
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  width: 5%;
+  transition: 0.5s;
+}
+
+.link:hover{
+  color: blue;
+}
+
 .container{
   display: flex;
   flex-direction: column;
@@ -39,6 +67,14 @@ h3{
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+}
+
+.favouriteAnime li{
+  display: inline-block;
+}
+
+.favouriteAnime img{
+  margin: 20px;
 }
 
 .anime{
@@ -53,7 +89,7 @@ h3{
 }
 
 .anime img:hover {
-  transform: scale(1.1);
+  transform: scale(1.14);
 }
 
 .form{

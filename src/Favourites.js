@@ -1,14 +1,18 @@
 // TODO: grab from firebase and display on this page with a <LINK /> to this page that displays the animes in firebase
 import firebase from "./firebase";
-import { getDatabase, ref, onValue, push, remove } from "firebase/database";
+import { getDatabase, ref, onValue, remove } from "firebase/database";
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
-const WatchLater = () => {
-
+const Favourites = () => {
     const [anime, setAnime] = useState([]);
-    const { animeSearched } = useParams();
+
+    const removeAnime = (animeId) => {
+        const database = getDatabase(firebase);
+        const dbRef = ref(database, `/${animeId}`);
+    
+        remove(dbRef);
+      }
 
       useEffect(() => {
         const database = getDatabase(firebase);
@@ -28,32 +32,33 @@ const WatchLater = () => {
               }
             );
           }
-          setAnime(newState) 
+          setAnime(newState);
         })
       }, [])
 
+      console.log(anime)
 
     return(
         <section>
-            <Link to={'/'}>
-                <h3>Home</h3>
+            <Link className="link" to={'/'}>
+                <h4>Home</h4>
             </Link>
-            <div className="aboutAnime">
+            <section className="anime">
                 { 
                     anime.map( (anime) => {
-                        const shows = anime.name
                             return(
-                                <li className="wrapper" key={shows.mal_id}>
-                                <Link to={`/anime/${shows.mal_id}`}>
-                                    <img src={shows.images.jpg.image_url} alt={shows.title} />
-                                </Link>
-                        </li>
+                                <li className="container" key={anime.name.mal_id}>
+                                    <Link className="link" to={`/anime/${anime.name.mal_id}`}>
+                                        <img src={anime.name.images.jpg.image_url} alt={anime.name.title} />
+                                    </Link>
+                                    <button onClick={ () => { removeAnime( anime.key ) } }>X</button>
+                                </li>
                             )
                     }) 
                 }
-            </div>
+            </section>
         </section>
     )
 }
 
-export default WatchLater;
+export default Favourites;

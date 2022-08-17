@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const AboutAnime = ({ addingAnime, anime, setAnime } ) => {
+const AboutAnime = ({ addingAnime, anime, setAnime, added, setAdded } ) => {
 
     const { animeId } = useParams();
     const [error, setError] = useState(false);
@@ -38,7 +38,7 @@ const AboutAnime = ({ addingAnime, anime, setAnime } ) => {
                 <div className="aboutAnime">
                     <div className="wrapper">
     
-                        <button onClick={ () => addingAnime() }>Add to favourites</button>
+                        { added === true ? 'Added' : <button onClick={ () => addingAnime() }>Add to favourites</button> }
                         { anime.images ? <img className="aboutImg" src={anime.images.jpg.image_url} alt={anime.title} /> : null }
                         <h2>{ anime.title_english ? anime.title_english : anime.title }</h2>
                         <p>{anime.synopsis}</p>
@@ -48,7 +48,7 @@ const AboutAnime = ({ addingAnime, anime, setAnime } ) => {
                         <p>{ anime.streaming ? `Watch on ${anime.streaming.map( (anime) => { return( ` ${anime.name}` ) }) }` : null}</p>
                     </div>
                 </div>
-                <Link to={'/'}>
+                <Link className="link" to={'/'} onClick={ () => {setAdded(false)} }>
                     <h4>Home</h4>
                 </Link>
             </section>

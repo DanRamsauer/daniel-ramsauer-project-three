@@ -32,10 +32,10 @@ const DisplayAnime = ({ nextPage, setNextPage }) => {
     
             { nextPage > 0 ? <p>{`Page ${nextPage}`}</p> : null }
 
-            <Link to={'/watch/watchlater'}>
+            <Link className="link" to={'/watch/watchlater'}>
                 <h4>Favourites</h4>
             </Link>
-            
+
             <section className="anime">
                 {
                     anime.map( (anime) => {

@@ -6,7 +6,7 @@ import SearchAnime from './SearchAnime';
 import Form from './Form'
 import ErrorPage from './ErrorPage';
 import NextPage from './NextPage';
-import WatchLater from './WatchLater';
+import Favourites from './Favourites';
 import { Routes, Route } from 'react-router-dom';
 import firebase from "./firebase";
 import { getDatabase, ref, onValue, push, remove } from "firebase/database";
@@ -17,13 +17,15 @@ import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 function App() {
   const [ anime, setAnime ] = useState([]);
   const [ nextPage, setNextPage ] = useState(1);
-
+  const [ added, setAdded ] = useState(false);
   
   const addingAnime = () => {
     const database = getDatabase(firebase);
     const dbRef = ref(database);
 
-    push(dbRef, anime)
+    push(dbRef, anime);
+
+    setAdded(true);
   }
     
     return (
@@ -34,10 +36,10 @@ function App() {
 
         <Routes>
           <Route path='/' element={ <DisplayAnime anime={anime} setAnime={setAnime} nextPage={nextPage} setNextPage={setNextPage} /> } />
-          <Route path='/anime/:animeId' element={ <AboutAnime addingAnime={addingAnime} anime={anime} setAnime={setAnime} /> }/>
+          <Route path='/anime/:animeId' element={ <AboutAnime addingAnime={addingAnime} anime={anime} setAnime={setAnime} added={added} setAdded={setAdded} /> }/>
           <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
           <Route path='/page/:page' element={ <NextPage anime={anime} nextPage={nextPage} setNextPage={setNextPage} setAnime={setAnime} /> }/>
-          <Route path='/watch/:later' element={ <WatchLater /> } />
+          <Route path='/watch/:later' element={ <Favourites /> } />
           <Route path='*' element={ <ErrorPage /> } />
         </Routes>
     </div>
