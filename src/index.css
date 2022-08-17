@@ -15,10 +15,153 @@ code {
 html{
   font-size: 125%;
   text-align: center;
+  background-image: url(../assets/redlightbackground\ \(2\).jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-.anime {
+
+h1,
+label,
+p,
+h2,
+h3{
+  color: white;
+}
+
+button{
+  background-color: white;
+  border: white 3px solid;
+  color: black;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: lightcoral;
+  border: solid lightcoral 3px;
+}
+
+.link{
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  width: 5%;
+  transition: 0.5s;
+}
+
+.link:hover{
+  color: blue;
+}
+
+.container{
   display: flex;
   flex-direction: column;
-  width: 20%;
+  padding: 15px;
   margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1400px;
+  width: 90%;
+}
+
+.favouriteAnime li{
+  display: inline-block;
+}
+
+.favouriteAnime img{
+  margin: 20px;
+}
+
+.anime{
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.anime img {
+  transition: 0.5s;
+}
+
+.anime img:hover {
+  transform: scale(1.14);
+}
+
+.form{
+  align-self: center;
+}
+
+.aboutImg {
+  width: 15%;
+  margin: 0 auto;
+}
+
+.aboutAnime p {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.aboutAnime button {
+  width: 5%;
+  margin: 20px auto;
+}
+
+@media (max-width: 1500px) {
+  .anime {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .wrapper {
+    width: 88%;
+  }
+  .aboutAnime button {
+    width: 15%;
+    margin: 20px auto;
+  }
+  .aboutImg {
+    width: 25%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 1000px) {
+  .aboutImg {
+    width: 35%;
+    margin: 0 auto;
+  }
+  .aboutAnime button {
+    width: 15%;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 930px) {
+  .aboutAnime button {
+    width: 20%;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 730px) {
+  .aboutAnime button {
+    width: 25%;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 580px) {
+  .aboutImg {
+    width: 50%;
+    margin: 0 auto;
+  }
+  .aboutAnime button {
+    width: 35%;
+    margin: 20px auto;
+  }
 }

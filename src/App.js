@@ -1,8 +1,50 @@
 import './index.css';
-import axios from 'axios';
-import { useEffect,useState } from 'react';
+import { useState } from 'react';
 import DisplayAnime from './DisplayAnime';
+import AboutAnime from './AboutAnime';
+import SearchAnime from './SearchAnime';
 import Form from './Form'
+import ErrorPage from './ErrorPage';
+import Favourites from './Favourites';
+import { Routes, Route } from 'react-router-dom';
+import firebase from "./firebase";
+import { getDatabase, ref, push } from "firebase/database";
+
+// TODO: some stuff broke in media querys
+// TODO: change title and favicon
+
+function App() {
+  const [ anime, setAnime ] = useState([]);
+  const [ nextPage, setNextPage ] = useState(1);
+  const [ added, setAdded ] = useState(false);
+  
+  const addingAnime = () => {
+    const database = getDatabase(firebase);
+    const dbRef = ref(database);
+
+    push(dbRef, anime);
+
+    setAdded(true);
+  }
+    
+    return (
+      <div>
+        <h1>Anime Finder</h1>
+        
+        <Form />
+
+        <Routes>
+          <Route path='/' element={ <DisplayAnime anime={anime} setAnime={setAnime} nextPage={nextPage} setNextPage={setNextPage} /> } />
+          <Route path='/anime/:animeId' element={ <AboutAnime addingAnime={addingAnime} anime={anime} setAnime={setAnime} added={added} setAdded={setAdded} /> }/>
+          <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
+          <Route path='/watch/:later' element={ <Favourites /> } />
+          <Route path='*' element={ <ErrorPage /> } />
+        </Routes>
+    </div>
+  );
+}
+
+export default App;
 
 // Pseudo Code
 // MVP
@@ -13,9 +55,8 @@ import Form from './Form'
 // when the user searches an anime
 //     • grab the selected value from the search bar and input that into the params q from the api and display the anime image title and description to the page
 
-//     • have a dropdown menu with different genre options populated from the api
-
 // Stretch Goals
+
 // Have users be able to favourite them and add that list to firebase
 //     • have a button when clicked add the data of that api to firebase and display that in the favourites page / category
 //     • do the same thing but for the already watched category
@@ -23,34 +64,3 @@ import Form from './Form'
 
 // have a login or username to have specific lists
 //     • add a node that has the username and display their data into already watched / favourite
-
-function App() {
-  const [anime, setAnime] = useState([]);
-
-  useEffect( ()=> {
-    axios({
-      url: 'https://api.jikan.moe/v4/anime',
-      // url: 'https://api.jikan.moe/v4/top/anime',
-      method: 'GET',
-      dataResponse: 'json',
-      params: {
-        // page: 3,
-        q: '',
-        sfw: false
-      }
-    }) .then((res) => {
-      const results = res.data.data;
-      setAnime(results);
-    })
-  }, [])
-
-  return (
-    <div className="App">
-      <h1>Anime Finder</h1>
-      <Form />
-      <DisplayAnime anime={anime}/>
-    </div>
-  );
-}
-
-export default App;
