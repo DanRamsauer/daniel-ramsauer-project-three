@@ -38,7 +38,7 @@ const AboutAnime = ({ addingAnime, anime, setAnime, added, setAdded } ) => {
                 <div className="aboutAnime">
                     <div className="wrapper">
     
-                        { added === true ? 'Added' : <button onClick={ () => addingAnime() }>Add to favourites</button> }
+                        { added === true ? <p>Added</p> : <button onClick={ () => addingAnime() }>Add to favourites</button> }
                         { anime.images ? <img className="aboutImg" src={anime.images.jpg.image_url} alt={anime.title} /> : null }
                         <h2>{ anime.title_english ? anime.title_english : anime.title }</h2>
                         <p>{anime.synopsis}</p>
