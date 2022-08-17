@@ -1,4 +1,3 @@
-// TODO: grab from firebase and display on this page with a <LINK /> to this page that displays the animes in firebase
 import firebase from "./firebase";
 import { getDatabase, ref, onValue, remove } from "firebase/database";
 import { useEffect, useState } from 'react';
@@ -35,8 +34,6 @@ const Favourites = () => {
           setAnime(newState);
         })
       }, [])
-
-      console.log(anime)
 
     return(
         <section>

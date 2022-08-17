@@ -1,18 +1,16 @@
 import './index.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DisplayAnime from './DisplayAnime';
 import AboutAnime from './AboutAnime';
 import SearchAnime from './SearchAnime';
 import Form from './Form'
 import ErrorPage from './ErrorPage';
-import NextPage from './NextPage';
 import Favourites from './Favourites';
 import { Routes, Route } from 'react-router-dom';
 import firebase from "./firebase";
-import { getDatabase, ref, onValue, push, remove } from "firebase/database";
+import { getDatabase, ref, push } from "firebase/database";
 
 // TODO: some stuff broke in media querys
-// TODO: clean up code
 // TODO: change title and favicon
 
 function App() {
@@ -39,7 +37,6 @@ function App() {
           <Route path='/' element={ <DisplayAnime anime={anime} setAnime={setAnime} nextPage={nextPage} setNextPage={setNextPage} /> } />
           <Route path='/anime/:animeId' element={ <AboutAnime addingAnime={addingAnime} anime={anime} setAnime={setAnime} added={added} setAdded={setAdded} /> }/>
           <Route path='/search/:animeSearched' element={ <SearchAnime /> } />
-          <Route path='/page/:page' element={ <NextPage anime={anime} nextPage={nextPage} setNextPage={setNextPage} setAnime={setAnime} /> }/>
           <Route path='/watch/:later' element={ <Favourites /> } />
           <Route path='*' element={ <ErrorPage /> } />
         </Routes>

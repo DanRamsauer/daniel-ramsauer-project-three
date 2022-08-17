@@ -25,11 +25,10 @@ const AboutAnime = ({ addingAnime, anime, setAnime, added, setAdded } ) => {
     if (error === true) {
         return(
             <section>
-                <h2>You are clicking into the images too fast for the API to keep up please try slow it down</h2>
-                {/* <Link to={`/anime/${animeId}`}>
-                    <h4>Retry</h4>
-                </Link> */}
-                <button onClick={()=> handleClick()}>Retry</button>
+                <h2>This anime does not exist!</h2>
+                <Link to={`/`}>
+                    <h4>Home</h4>
+                </Link>
             </section>
         )
     } else {

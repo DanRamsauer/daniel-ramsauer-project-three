@@ -7,10 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* TODO: have button change color on hover */
-/* TODO: have links get bigger on hover and change the color */
-/* TODO: fix favourites page */
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -37,6 +33,7 @@ button{
   border: white 3px solid;
   color: black;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 button:hover{
@@ -67,6 +64,8 @@ button:hover{
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  max-width: 1400px;
+  width: 90%;
 }
 
 .favouriteAnime li{

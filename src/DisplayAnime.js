@@ -22,10 +22,7 @@ const DisplayAnime = ({ nextPage, setNextPage }) => {
 
     return(
         <section>
-            {/* <Link to={`/page/${2}`}>
-                <h3>Next page</h3>
-            </Link> */}
-
+            
             { nextPage > 1 ? <button onClick={()=> setNextPage(nextPage - 1)}>Last Page</button> : null }
     
             { nextPage > 0 ? <button onClick={()=> setNextPage(nextPage + 1)}>Next Page</button> : null }
