@@ -11,7 +11,8 @@ import { Routes, Route } from 'react-router-dom';
 import firebase from "./firebase";
 import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 
-// TODO: add firebase to add to favourites and watched later
+// TODO: some stuff broke in media querys
+// TODO: clean up code
 // TODO: change title and favicon
 
 function App() {
