@@ -18,6 +18,13 @@ html{
   background-image: url(../assets/redlightbackground\ \(2\).jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
+}
+
+h4{
+  align-self: center;
+  display: inline;
+  
 }
 
 h1,

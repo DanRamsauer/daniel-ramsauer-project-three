@@ -10,9 +10,6 @@ import { Routes, Route } from 'react-router-dom';
 import firebase from "./firebase";
 import { getDatabase, ref, push } from "firebase/database";
 
-// TODO: some stuff broke in media querys
-// TODO: change title and favicon
-
 function App() {
   const [ anime, setAnime ] = useState([]);
   const [ nextPage, setNextPage ] = useState(1);
@@ -30,6 +27,8 @@ function App() {
     return (
       <div>
         <h1>Anime Finder</h1>
+
+        <h3>Click the images for more information on the anime</h3>
         
         <Form />
 
